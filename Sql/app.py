@@ -6,15 +6,16 @@ conn = sqlite3.connect("sample.db")
 # Create a cursor
 c = conn.cursor()
 
-customers = [
-    ("Sagarika", "Pal", "sagarika18jan@adfsdaf"),
-    ("Kunal", "Nath", "kunalknath@adfasf"),
-    ("Violina", "Bora", "violina@afdasdf")
-]
+c.execute("SELECT first_name FROM customers WHERE last_name = 'Pal'")
+names = c.fetchall()
+namesArr = []
+for i in range(len(names)):
+    if names == []:
+        break
+    else:
+        namesArr.append(names[i][0])
 
-
-c.executemany("INSERT INTO customers VALUES (?, ?, ?)", customers)
-
+print(names[0][0])
 print("Query executed successfully!")
 conn.commit()
 

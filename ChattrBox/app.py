@@ -1,5 +1,5 @@
 """Importing desired libraries"""
-import cs50
+import sqlite3
 from flask import Flask, redirect, render_template, request, session
 from werkzeug.security import check_password_hash, generate_password_hash
 from helpers import apology, login_required
@@ -16,9 +16,9 @@ Session(app)
 app.config["TEMPLATES_AUTO-RELOAD"] = True
 
 
-# Configure CS50 Library to use SQLite database
-db = cs50.SQL("sqlite:///chattrbox.db")
-
+# Connect to the SQLite database
+conn = sqlite3.connect("chattrbox.db")
+db = conn.cursor() # Creating a cursor object
 
 @app.after_request
 def after_request(response):
@@ -56,14 +56,15 @@ def login():
             return apology("must provide password", 403)
 
         # Query database for username
-        rows = db.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
+        db.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
+        rows = db.fetchall()
 
         # Ensure username exists and password is correct
-        if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
+        if len(rows) != 1 or not check_password_hash(rows[0][2], request.form.get("password")):
             return apology("invalid username and/or password", 403)
 
         # Remember which user has logged in
-        session["user_id"] = rows[0]["id"]
+        session["user_id"] = rows[0][0]
 
         # Redirect user to home page
         return redirect("/")
@@ -89,13 +90,14 @@ def register():
 
     if request.method == "POST":
         # Load up the users database to check for already existing users
-        usernames_dict = db.execute("SELECT username FROM users")
+        db.execute("SELECT username FROM users")
+        usernames_tuples = db.fetchall()
         usernames = []
-        for i in range(len(usernames_dict)):
-            if usernames_dict == []:
+        for i in range(len(usernames_tuples)):
+            if usernames_tuples == []:
                 break
             else:
-                usernames.append(usernames_dict[i]["username"])
+                usernames.append(usernames_tuples[i][0])
         
         # Store user's username and password
         username = request.form.get("username")
@@ -114,8 +116,10 @@ def register():
             return apology("Passwords do not match")
         else:
             db.execute("INSERT OR IGNORE INTO users (username, hash) VALUES (?, ?)", username, hashed_password)
-            user_id = db.execute("SELECT id FROM users WHERE username = ?", username)
-            session["user_id"] = user_id[0]["id"]
+            conn.commit()
+            db.execute("SELECT id FROM users WHERE username = ?", username)
+            user_id = db.fetchall()
+            session["user_id"] = user_id[0][0]
             return redirect("/")
 
     return render_template("register.html")
