@@ -6,22 +6,6 @@
 
 {% block main %}
   <div class="container" id="main-chat">
-    <script type="text/javascript">
-      $(document).ready(function() {
-        var socket = io.connect("https://192.168.225.46:5000");
-        socket.on('connect', function() {
-          socket.send("User connected!");
-        });
-
-        socket.on('message', function(data) {
-          $('#chat-window').append($('<p>').text(data));
-        });
-
-        $('#send-button').on('click', function() {
-          socket.send($('{{ username }}') + ': ' + $('message').val());
-        })
-      })
-    </script>
     <div class="container" id="chat-window">
       
     </div>
