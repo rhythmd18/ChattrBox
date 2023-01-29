@@ -1,10 +1,9 @@
 """Importing desired libraries"""
-import sqlite3
+from cs50 import SQL
 from flask import Flask, redirect, render_template, request, session
-from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
-
 from helpers import apology, login_required
+from flask_session import Session
 
 
 # Configure session
@@ -35,9 +34,7 @@ def after_request(response):
 @login_required
 def index():
     """Enter the chat room"""
-    rows = db.execute("SELECT * FROM users WHERE id = ?", session['user_id'])
-    username = rows[0]['username']
-    return render_template("chat.html", username=username)
+    return render_template("chat.html")
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -55,14 +52,14 @@ def login():
             return apology("must provide username", 403)
 
         # Ensure password was submitted
-        elif not request.form.get("password"):
+        if not request.form.get("password"):
             return apology("must provide password", 403)
 
         # Query database for username
         rows = db.execute("SELECT * FROM users WHERE username = ?", (request.form.get("username"),))
 
         # Ensure username exists and password is correct
-        if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
+        if not rows or not check_password_hash(rows[0]["hash"], request.form.get("password")):
             return apology("invalid username and/or password", 403)
 
         # Remember which user has logged in
@@ -72,8 +69,7 @@ def login():
         return redirect("/")
 
     # User reached route via GET (as by clicking a link or via redirect)
-    else:
-        return render_template("login.html")
+    return render_template("login.html")
 
 
 @app.route("/logout")
@@ -143,7 +139,7 @@ def change_password():
             return apology("Enter the same password again")
         else:
             # Query database for id
-            rows = db.execute("SELECT * FROM users WHERE id = ?", session["user_id"])
+            rows = db.execute("SELECT * FROM users WHERE id = ?", (session["user_id"],))
 
             # Check if the old password entered is correct
             if not check_password_hash(rows[0]["hash"], password):
