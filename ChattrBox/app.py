@@ -1,5 +1,5 @@
 """Importing desired libraries"""
-from cs50 import SQL
+import cs50
 from flask import Flask, redirect, render_template, request, session
 from werkzeug.security import check_password_hash, generate_password_hash
 from helpers import apology, login_required
@@ -17,7 +17,7 @@ app.config["TEMPLATES_AUTO-RELOAD"] = True
 
 
 # Configure CS50 Library to use SQLite database
-db = sqlite3.connect("chattrbox.db", check_same_thread=False)
+db = cs50.SQL("sqlite:///chattrbox.db")
 
 
 @app.after_request
@@ -56,10 +56,10 @@ def login():
             return apology("must provide password", 403)
 
         # Query database for username
-        rows = db.execute("SELECT * FROM users WHERE username = ?", (request.form.get("username"),))
+        rows = db.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
 
         # Ensure username exists and password is correct
-        if not rows or not check_password_hash(rows[0]["hash"], request.form.get("password")):
+        if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
             return apology("invalid username and/or password", 403)
 
         # Remember which user has logged in
@@ -139,7 +139,7 @@ def change_password():
             return apology("Enter the same password again")
         else:
             # Query database for id
-            rows = db.execute("SELECT * FROM users WHERE id = ?", (session["user_id"],))
+            rows = db.execute("SELECT * FROM users WHERE id = ?", session["user_id"])
 
             # Check if the old password entered is correct
             if not check_password_hash(rows[0]["hash"], password):
