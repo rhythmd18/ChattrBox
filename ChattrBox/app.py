@@ -18,7 +18,7 @@ app.config["TEMPLATES_AUTO-RELOAD"] = True
 
 
 # Configure CS50 Library to use SQLite database
-db = sqlite3.connect("chattrbox.db")
+db = sqlite3.connect("chattrbox.db", check_same_thread=False)
 
 
 @app.after_request
