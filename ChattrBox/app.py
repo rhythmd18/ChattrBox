@@ -1,7 +1,7 @@
-from cs50 import SQL
-from flask import Flask, flash, redirect, render_template, request, session
+"""Importing desired libraries"""
+import sqlite3
+from flask import Flask, redirect, render_template, request, session
 from flask_session import Session
-from tempfile import mkdtemp
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from helpers import apology, login_required
@@ -18,7 +18,7 @@ app.config["TEMPLATES_AUTO-RELOAD"] = True
 
 
 # Configure CS50 Library to use SQLite database
-db = SQL("sqlite:///chattrbox.db")
+db = sqlite3.connect("chattrbox.db")
 
 
 @app.after_request
@@ -105,7 +105,7 @@ def register():
         username = request.form.get("username")
         password = request.form.get("password")
         confirmation = request.form.get("confirmation")
-        hash = generate_password_hash(password)
+        hashed_password = generate_password_hash(password)
 
         # Validate username and password
         if username in usernames:
@@ -117,9 +117,9 @@ def register():
         elif password != confirmation:
             return apology("Passwords do not match")
         else:
-            db.execute("INSERT OR IGNORE INTO users (username, hash) VALUES (?, ?)", username, hash)
-            id = db.execute("SELECT id FROM users WHERE username = ?", username)
-            session["user_id"] = id[0]["id"]
+            db.execute("INSERT OR IGNORE INTO users (username, hash) VALUES (?, ?)", username, hashed_password)
+            user_id = db.execute("SELECT id FROM users WHERE username = ?", username)
+            session["user_id"] = user_id[0]["id"]
             return redirect("/")
 
     return render_template("register.html")
@@ -127,7 +127,9 @@ def register():
 
 @app.route("/changepassword", methods=["GET", "POST"])
 @login_required
-def changePassword():
+def change_password():
+    """Changing user's password"""
+
     if request.method == "POST":
         password = request.form.get("password")
         newpassword = request.form.get("newpassword")
