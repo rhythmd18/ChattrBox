@@ -17,7 +17,7 @@ app.config["TEMPLATES_AUTO-RELOAD"] = True
 
 
 # Connect to the SQLite database
-conn = sqlite3.connect("chattrbox.db")
+conn = sqlite3.connect("chattrbox.db", check_same_thread=False)
 db = conn.cursor() # Creating a cursor object
 
 @app.after_request
@@ -55,8 +55,9 @@ def login():
         if not request.form.get("password"):
             return apology("must provide password", 403)
 
+        username = request.form.get("username")
         # Query database for username
-        db.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
+        db.execute("SELECT * FROM users WHERE username = ?", (username,))
         rows = db.fetchall()
 
         # Ensure username exists and password is correct
@@ -115,9 +116,9 @@ def register():
         elif password != confirmation:
             return apology("Passwords do not match")
         else:
-            db.execute("INSERT OR IGNORE INTO users (username, hash) VALUES (?, ?)", username, hashed_password)
+            db.execute("INSERT INTO users (username, hash) VALUES (?, ?)", (username, hashed_password))
             conn.commit()
-            db.execute("SELECT id FROM users WHERE username = ?", username)
+            db.execute("SELECT id FROM users WHERE username = ?", (username,))
             user_id = db.fetchall()
             session["user_id"] = user_id[0][0]
             return redirect("/")
@@ -143,16 +144,16 @@ def change_password():
             return apology("Enter the same password again")
         else:
             # Query database for id
-            rows = db.execute("SELECT * FROM users WHERE id = ?", session["user_id"])
+            db.execute("SELECT * FROM users WHERE id = ?", (session["user_id"],))
+            rows = db.fetchall()
 
             # Check if the old password entered is correct
-            if not check_password_hash(rows[0]["hash"], password):
+            if not check_password_hash(rows[0][2], password):
                 return apology("Enter your current password correctly")
 
-            db.execute("UPDATE users SET hash = (?) WHERE id = ?", generate_password_hash(password), session["user_id"])
+            db.execute("UPDATE users SET hash = (?) WHERE id = ?", (generate_password_hash(password), session["user_id"]))
+            conn.commit()
             return redirect("/")
         
     else:
         return render_template("change-password.html")
-
-
