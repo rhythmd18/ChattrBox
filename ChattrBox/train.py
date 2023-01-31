@@ -57,9 +57,11 @@ class Chatdataset(Dataset):
         self.x_data = x_train
         self.y_data = y_train
 
+    # Supporting indexing such that dataset[i] can be used to get ith sample
     def __getitem__(self, index):
         return self.x_data[index], self.y_data[index]
 
+    # Calling the len(dataset to return the size)
     def __len__(self):
         return self.n_samples
 
@@ -105,3 +107,18 @@ for epoch in range(num_epochs):
 
 print(f'final loss, loss={loss.item():.4f}')
 
+
+# Saving the data
+data = {
+    "model_state": model.state_dict(),
+    "input_size": input_size,
+    "output_size": output_size,
+    "hidden_size": hidden_size,
+    "all_words": all_words,
+    "tags": tags
+}
+# Creating the file to store the data
+FILE = "data.pth" # Naming the file
+torch.save(data, FILE)
+
+print(f'Training complete. File saved to {FILE}')
