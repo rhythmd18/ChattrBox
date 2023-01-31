@@ -6,10 +6,10 @@
 
 {% block main %}
   <div class="container" id="main-chat">
-    <div class="container" id="chat-window">
-      
+    <div class="chat-window">
+      <div></div>
     </div>
-    <div class="container" id="bottom-panel">
+    <div class="bottom-panel">
       <form style="display: flex;">
           <input type="text" class="form-control shadow p-2 mb-3 bg-body-tertiary" id="message" placeholder="Type your message here...">
           <button type="submit" class="btn btn-primary" id="send-button">
@@ -20,4 +20,9 @@
       </form>
     </div>
   </div>
+
+  <script>
+    $SCRIPT_ROOT = {{ request.script_root|tojson }};
+  </script>
+  <script type="text/javascript" src="{{ url_for('static', filename='app.js') }}"></script>
 {% endblock %}

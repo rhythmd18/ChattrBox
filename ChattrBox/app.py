@@ -1,9 +1,10 @@
 """Importing desired libraries"""
 import sqlite3
-from flask import Flask, redirect, render_template, request, session
+from flask import Flask, redirect, render_template, request, session, jsonify
 from werkzeug.security import check_password_hash, generate_password_hash
 from helpers import apology, login_required
 from flask_session import Session
+from chat import get_response
 
 
 # Configure session
@@ -36,6 +37,13 @@ def index():
     """Enter the chat room"""
     return render_template("chat.html")
 
+@app.route("/predict", methods=["POST"])
+def predict():
+    text = request.get_json().get("message")
+    # TODO: Check if the message is valid
+    response = get_response(text)
+    message = {"answer": response}
+    return jsonify(message)
 
 
 @app.route("/login", methods=["GET", "POST"])
