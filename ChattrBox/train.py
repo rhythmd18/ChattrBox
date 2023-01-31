@@ -6,56 +6,43 @@ import torch
 import torch.nn as nn
 from torch.utils.data import Dataset, DataLoader
 
+# Load intents.json file
 with open('intents.json', 'r') as f:
     intents = json.load(f)
 
-all_words = []
-tags = []
-xy = []
+all_words = [] # Collecting all of the tokenized words
+tags = [] # Collecting all the different patterns
+xy = [] # Creating an empty list that will hold both of our patterns and the tags
 
+# Iterating through all the contents of the intents.json
 for intent in intents['intents']:
     tag = intent['tag']
-    tags.append(tag)
+    tags.append(tag) # Appending the tags to the tags array
+    # Iterating through all the patterns in the intents.json file
     for pattern in intent['patterns']:
         w = tokenize(pattern)
-        all_words.extend(w)
-        xy.append((w, tag))
+        all_words.extend(w) # Extending the all_words array to include the tokenized words
+        xy.append((w, tag)) # Appending words and their corresponding tags to the xy array
 
+# Creating a list of punctuation marks that are to be excluded from the all_words array
 ignore_words = ['?', '!', '.', ',']
 all_words = [stem(w) for w in all_words if w not in ignore_words]
 all_words = sorted(set(all_words))
 tags = sorted(set(tags))
 print(tags)
 
-x_train = []
-y_train = []
+# Creating the training data
+x_train = [] # Creating an array that would contain the bag of words
+y_train = [] # Creating an array that would contain an associated number for each tag
+# Iterating through the xy array
 for (pattern_sentence, tag) in xy:
     bag = bag_of_words(pattern_sentence, all_words)
+    # Appending the bag to the x_train array
     x_train.append(bag)
+    
+    label = tags.index(tag) # Creating a number associated with each tag
+    y_train.append(label) # Appending the label to the y_train array
 
-    label = tags.index(tag)
-    y_train.append(label)
-
+# Converting the training data to numpy arrays
 x_train = np.array(x_train)
 y_train = np.array(y_train)
-
-
-class ChatDataset(Dataset):
-    def __init__(self):
-        self.n_samples = len(x_train)
-        self.x_data = x_train
-        self.y_data = y_train
-
-    # dataset[idx]
-    def __getitem__(self, index):
-        return self.x_data[index], self.y_data[index]
-
-    def __len__(self):
-        return self.n_samples
-
-
-# Hyperparameters
-batch_size = 8
-
-dataset = ChatDataset()
-train_loader = DataLoader(dataset=dataset, batch_size=batch_size, shuffle=True, num_workers=2)
