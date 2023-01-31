@@ -7,6 +7,8 @@ import torch
 import torch.nn as nn
 from torch.utils.data import Dataset, DataLoader
 
+from model import NeuralNet
+
 # Load intents.json file
 with open('intents.json', 'r') as f:
     intents = json.load(f)
@@ -64,7 +66,14 @@ class Chatdataset(Dataset):
 
 # Hyperparameters
 batch_size = 8
+hidden_size = 8
+output_size = len(tags)
+input_size = len(x_train[0])
+print(input_size, len(all_words))
+print(output_size, tags)
 
 # Creating a dataset instance
 dataset = Chatdataset()
 train_loader = DataLoader(dataset=dataset, batch_size=batch_size, shuffle=True, num_workers=2)
+
+model = NeuralNet(input_size=input_size, hidden_size=hidden_size, output_size=output_size)
