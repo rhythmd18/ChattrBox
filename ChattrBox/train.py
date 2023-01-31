@@ -47,3 +47,24 @@ for (pattern_sentence, tag) in xy:
 # Converting the training data to numpy arrays
 x_train = np.array(x_train)
 y_train = np.array(y_train)
+
+# Creating a dataset class
+class Chatdataset(Dataset):
+    def __init__(self):
+        self.n_samples = len(x_train)
+        self.x_data = x_train
+        self.y_data = y_train
+
+    def __getitem__(self, index):
+        return self.x_data[index], self.y_data[index]
+
+    def __len__(self):
+        return len(self.n_samples)
+
+
+# Hyperparameters
+batch_size = 8
+
+# Creating a dataset instance
+dataset = Chatdataset()
+train_loader = DataLoader(dataset=dataset, batch_size=batch_size, shuffle=True, num_workers=2)
