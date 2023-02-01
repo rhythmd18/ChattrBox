@@ -30,12 +30,12 @@ def after_request(response):
     return response
 
 
-
 @app.route("/")
 @login_required
 def index():
     """Enter the chat room"""
     return render_template("chat.html")
+
 
 @app.route("/predict", methods=["POST"])
 @login_required
