@@ -5,7 +5,6 @@ class ChatBox {
             sendBtn: document.querySelector('#send-button')
         }
 
-        this.state = false;
         this.messages = [];
     }
 
@@ -22,7 +21,7 @@ class ChatBox {
     }
 
     onSendBtn(chatBox) {
-        var textField = chatBox.querySelector('input');
+        var textField = chatBox.querySelector('#message');
         let text1 = textField.value
         if (text1 === "") {
             return;

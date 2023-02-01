@@ -41,7 +41,6 @@ def index():
 @login_required
 def predict():
     text = request.get_json().get("message")
-    # TODO: Check if the message is valid
     response = get_response(text)
     message = {"answer": response}
     return jsonify(message)

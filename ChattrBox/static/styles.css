@@ -110,21 +110,6 @@ h1 {
     top: 70px;
 }
 
-.my-message{
-    background-color: #ddd;
-    border-radius: 8px;
-    padding: 10px;
-    margin: 10px 0;
-    text-align: right;
-}
-
-.other-message {
-    background-color: #eee;
-    border-radius: 8px;
-    padding: 10px;
-    margin: 10px 0;
-}
-
 .messages__item {
     background: orange;
     max-width: 60.6%;
@@ -137,4 +122,26 @@ h1 {
 
 .messages__item--visitor {
     margin-right: auto;
+}
+
+.messages__item {
+    margin-top: 10px;
+    background: #E0E0E0;
+    padding: 8px 12px;
+    max-width: 70%;
+}
+
+.messages__item--visitor,
+.messages__item--typing {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.messages__item--operator {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    background: var(--primary);
+    color: white;
 }
