@@ -1,34 +1,34 @@
-class ChatBox {
+class Chatbox {
     constructor() {
-        this.ags = {
-            chatBox: document.querySelector('.chat-window'),
-            sendBtn: document.querySelector('#send-button')
+        this.args = {
+            chatBox: document.querySelector('#main-chat'),
+            sendButton: document.querySelector('#send-button')
         }
 
         this.messages = [];
     }
 
-
     display() {
-        const {chatBox, sendBtn} = this.args;
-        sendBtn.addEventListener('click', () => this.onSendBtn(chatBox))
-        const node = chatBox.querySelector('#input');
-        node.addEventListener('keyup', ({key}) => {
+        const {chatBox, sendButton} = this.args;
+        sendButton.addEventListener('click', () => this.onSendButton(chatBox))
+        const node = chatBox.querySelector('#message');
+        node.addEventListener("keyup", ({key}) => {
             if (key === "Enter") {
-                this.onSendBtn(chatBox);
+                this.onSendButton(chatBox)
             }
         })
     }
 
-    onSendBtn(chatBox) {
-        var textField = chatBox.querySelector('#message');
-        let text1 = textField.value
+
+    onSendButton(chatbox) {
+        var textField = chatbox.querySelector('#message');
+        let text1 = textField.value;
         if (text1 === "") {
             return;
         }
 
         let msg1 = { name: "User", message: text1 }
-        this.messages.push(msg1);
+        this.messages.push(msg1)
 
         fetch($SCRIPT_ROOT + '/predict', {
             method: 'POST',
@@ -41,32 +41,29 @@ class ChatBox {
         .then(r => {
             let msg2 = { name: "RhyBot", message: r.answer };
             this.messages.push(msg2);
-            this.updateChatText(chatBox)
+            this.updateChatText(chatbox)
             textField.value = ''
         }).catch((error) => {
-            console.error('Error:', error);
-            this.updateChatText(chatBox);
+            console.error('Error', error);
+            this.updateChatText(chatbox)
             textField.value = ''
         });
     }
 
-    updateChatText(chatBox) {
+    updateChatText(chatbox) {
         var html = '';
-        this.messages.slice().reverse().forEach(function(item,) {
+        this.messages.slice().reverse().forEach(function(item, ) {
             if (item.name === "RhyBot") {
-                html += '<div class="messages__item messages__item--visitor">' + item.message + '</div>'
-            }
-            else {
-                html += '<div class="messages__item messages__item--operator">' + item.message + '</div>'
+                html += '<div class="messages__item messages__item--visitor">' + item.message + '</div>';
+            } else {
+                html += '<div class="messages__item messages__item--operator">' + item.message + '</div>';
             }
         });
 
-        const chatmessage = chatBox.querySelector('.chat-window');
+        const chatmessage = chatbox.querySelector('.chat-window');
         chatmessage.innerHTML = html;
     }
-
 }
 
-const chatBox = new ChatBox();
-chatBox.display();
-
+const chatbox = new Chatbox();
+chatbox.display();
