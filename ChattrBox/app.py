@@ -170,4 +170,5 @@ def change_password():
 @app.route("/aboutus")
 @login_required
 def aboutus():
+    """Redirect to About section"""
     return render_template("aboutus.html")
