@@ -31,7 +31,7 @@ h1 {
 
 
 #main-chat {
-    margin-top: 40px;
+    margin-top: 10px;
     display: block;
     flex-direction: column;
     margin-right: auto;
@@ -135,12 +135,23 @@ h1 {
     color: white;
 }
 
-#header {
-    flex-direction: column;
-    position: fixed;
-    width: 100%;
-}
 
 .profile {
-    margin-left: 30px;
+    margin-left: 20px;
+    margin-right: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+#bot-profile {
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 20px;
+    border-color: rgb(118, 143, 255, 0.5);
 }
