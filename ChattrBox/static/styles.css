@@ -87,9 +87,14 @@ h1 {
 }
 
 #color-mode-btn {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    bottom: 0;
+    width: 100px;
+    height: 70px;
     display: flex;
-    position: fixed;
-    top: 70px;
+    justify-content: space-around;
 }
 
 
