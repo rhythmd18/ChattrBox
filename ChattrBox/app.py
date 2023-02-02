@@ -167,3 +167,7 @@ def change_password():
     else:
         return render_template("change-password.html")
 
+@app.route("/aboutus")
+@login_required
+def aboutus():
+    return render_template("aboutus.html")
