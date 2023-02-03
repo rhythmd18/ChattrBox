@@ -33,20 +33,20 @@ def after_request(response):
 @app.route("/")
 @login_required
 def index():
-    """Enter the chat room"""
+    """Entering the chat room"""
     return render_template("chat.html")
 
 
 @app.route("/welcome", methods=["GET", "POST"])
 @login_required
 def welcome():
-
+    """Welcoming the user!"""
     db.execute("SELECT * FROM users WHERE id = ?", (session["user_id"],))
     rows = db.fetchall()
     username = rows[0][1]
-    if request.method == "POST":
+    if request.method == "POST": # If method is "post"
         return redirect("/")
-        
+    # If method is "get"
     return render_template("welcome.html", username=username)
 
 
