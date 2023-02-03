@@ -167,6 +167,27 @@ def change_password():
     else:
         return render_template("change-password.html")
 
+
+@app.route("/deleteaccount", methods=["GET", "POST"])
+@login_required
+def delete_account():
+    """Deleting user's account"""
+    if request.method == "POST":
+        # 
+        password = request.form.get("password")
+        if not password:
+            return apology("Why is your password field empty, HUH?")
+        db.execute("SELECT * FROM users WHERE id = ?", (session["user_id"],))
+        rows = db.fetchall()
+        if not check_password_hash(rows[0][2], password):
+            return apology("Your password is incorrect!")
+        db.execute("DELETE FROM users WHERE id = ?", (session["user_id"],))
+        conn.commit()
+        return redirect("/login")
+
+    return render_template("delete.html")
+
+
 @app.route("/aboutus")
 @login_required
 def aboutus():
