@@ -180,3 +180,13 @@ h1 {
     text-align: justify;
     padding: 0px;
 }
+
+#welcome {
+    display: block;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 50px;
+    max-width: 500px;
+    text-align: center;
+}

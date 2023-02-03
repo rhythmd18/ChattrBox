@@ -1,0 +1,18 @@
+{% extends "layout_after_signin.html" %}
+
+{% block title %}
+  Welcome!
+{% endblock %}
+
+{% block main %}
+    <img src="/static/My project.png" alt="ChattrBox Logo" class="login-img">
+    <div class="container" id="welcome">
+        <div class="bot-profile">
+            <img src="/static/WelcomeAvatar.jpeg" style="height: 100px; border-radius: 60px; margin-bottom: 20px;">
+        </div>
+        <h5 style="margin-bottom: 1px;">Hi {{ username }}! My name is RhyBot. Wanna chat with me?</h5>
+        <form action="/welcome" method="post">
+            <button class="btn btn-primary" style="border-radius: 20px;">Yes, Take Me In!</button>
+        </form>
+    </div>
+{% endblock %}

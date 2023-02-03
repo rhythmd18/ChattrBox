@@ -37,6 +37,19 @@ def index():
     return render_template("chat.html")
 
 
+@app.route("/welcome", methods=["GET", "POST"])
+@login_required
+def welcome():
+
+    db.execute("SELECT * FROM users WHERE id = ?", (session["user_id"],))
+    rows = db.fetchall()
+    username = rows[0][1]
+    if request.method == "POST":
+        return redirect("/")
+        
+    return render_template("welcome.html", username=username)
+
+
 @app.route("/predict", methods=["POST"])
 @login_required
 def predict():
@@ -77,7 +90,7 @@ def login():
         session["user_id"] = rows[0][0]
 
         # Redirect user to home page
-        return redirect("/")
+        return redirect("/welcome")
 
     # User reached route via GET (as by clicking a link or via redirect)
     return render_template("login.html")
@@ -130,7 +143,7 @@ def register():
             db.execute("SELECT id FROM users WHERE username = ?", (username,))
             user_id = db.fetchall()
             session["user_id"] = user_id[0][0]
-            return redirect("/")
+            return redirect("/welcome")
 
     return render_template("register.html")
 
