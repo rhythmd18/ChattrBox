@@ -1,71 +1,87 @@
 {
     "intents": [
       {
+        "tag": "about",
+        "patterns": [
+          "What's your name?",
+          "Tell me your name",
+          "Who are you?",
+          "Tell me about yourself"
+        ],
+        "responses": [
+          "My name is RhyBot, and I'm an AI chatbot. I have been trained using the PyTorch library of Python and I use nltk(Natural Language Toolkit) which helps with the NLP(Natural Language Processing) algorithm. Anything more?", 
+          "I must introduced myself already the moment you logged in, didn't I?",
+          "Hi! I'm RhyBot. The ChatBot!"
+        ]
+      },
+      {
         "tag": "greeting",
         "patterns": [
           "Hi",
           "Hey",
           "How are you",
-          "Is anyone there?",
           "Hello",
-          "Good day"
+          "Good day",
+          "Good Morning",
+          "Good Evening"
         ],
         "responses": [
           "Hey :-)",
-          "Hello, thanks for visiting",
+          "Hello",
+          "Hello, nice to have you",
           "Hi there, what can I do for you?",
-          "Hi there, how can I help?"
+          "Hi there!",
+          "Hey! What's up?",
+          "sup",
+          "Hey! How's it going?"
+        ]
+      },
+      {
+        "tag": "howareyou",
+        "patterns": ["How are you", "How are you doing?"],
+        "responses": ["I'm a chatbot. As long as there's no technical issue or a bug in the code, I'm great! Haah"]
+      },
+      {
+        "tag": "fine",
+        "patterns": ["I'm doing good!", "I'm fine!", "Doing good!", "Doing amazing!", "I'm good. What about you?", "Doing great!"],
+        "responses": [
+          "That's great!",
+          "So good to hear that!",
+          "Awesome! I'm fine too!"
         ]
       },
       {
         "tag": "goodbye",
-        "patterns": ["Bye", "See you later", "Goodbye"],
+        "patterns": ["Bye", "See you later", "Goodbye", "Good Night", "ttyl", "farewell"],
         "responses": [
+          "It was an absolute pleasure talking to you!",
           "See you later, thanks for visiting",
           "Have a nice day",
-          "Bye! Come back again soon."
+          "Bye! Come back again soon.",
+          "Hope to talk to you soon",
+          "Take care.",
+          "Take a good care of yourself",
+          "Talk to you later",
+          "ttyl"
         ]
       },
       {
         "tag": "thanks",
-        "patterns": ["Thanks", "Thank you", "That's helpful", "Thank's a lot!"],
-        "responses": ["Happy to help!", "Any time!", "My pleasure"]
+        "patterns": ["Thanks", "Thank you", "That's helpful", "Thank's a lot!", "I'm very grateful to you", "Appreciate it", "Much appreciated"],
+        "responses": ["Happy to help!", "Any time!", "My pleasure", "It was my pleasure!", "Always!", "You're Welcome!", "You're most welcome!", "No problem, happy to help!", "No problem at all!"]
       },
       {
         "tag": "items",
         "patterns": [
           "Which items do you have?",
           "What kinds of items are there?",
-          "What do you sell?"
+          "What do you sell?",
+          "What is your occupation?",
+          "Who do you work for?",
+          "Where do you work in?"
         ],
         "responses": [
-          "We sell coffee and tea",
-          "We have coffee and tea"
-        ]
-      },
-      {
-        "tag": "payments",
-        "patterns": [
-          "Do you take credit cards?",
-          "Do you accept Mastercard?",
-          "Can I pay with Paypal?",
-          "Are you cash only?"
-        ],
-        "responses": [
-          "We accept VISA, Mastercard and Paypal",
-          "We accept most major credit cards, and Paypal"
-        ]
-      },
-      {
-        "tag": "delivery",
-        "patterns": [
-          "How long does delivery take?",
-          "How long does shipping take?",
-          "When do I get my delivery?"
-        ],
-        "responses": [
-          "Delivery takes 2-4 days",
-          "Shipping takes 2-4 days"
+          "Sorry! I am just a chatbot. I ain't involved in any sort of business or job."
         ]
       },
       {
@@ -73,12 +89,51 @@
         "patterns": [
           "Tell me a joke!",
           "Tell me something funny!",
-          "Do you know a joke?"
+          "Do you know a joke?",
+          "Do you know any joke",
+          "Can you be funny?",
+          "Make me laugh"
         ],
         "responses": [
           "Why did the hipster burn his mouth? He drank the coffee before it was cool.",
-          "What did the buffalo say when his son left for college? Bison."
+          "What did the buffalo say when his son left for college? Bison.",
+          "A pair of cows were talking in the field. One says, “Have you heard about the mad cow disease that’s going around?” “Yeah,” the other cow says. “Makes me glad I’m a penguin.”",
+          "Once, my father came home and found me in front of a roaring fire. That made my father very mad, as we didn’t have a fireplace.",
+          "Why don’t pirates take a shower before they walk the plank? They just wash up on shore.",
+          "In Denver, the members of a Sunday­-school class were asked to set down their favorite biblical truths. One youngster laboriously printed: “Do one to others as others do one to you.”",
+          "At a party, a young wife admonished her husband, “That’s the fourth time you’ve gone back for ice cream and cake. Doesn’t it embarrass you?” “Why should it?” answered her spouse. “I keep telling them it’s for you.”",
+          "A grasshopper walks into a bar. The bartender looks at him and says, “Hey, they named a drink after you!” “Really?” replies the grasshopper. “There’s a drink named Stan?”",
+          "You can’t believe everything you hear—but you can repeat it.",
+          "A Hollywood hostess, giving instructions to a new maid just before a party, cautioned: “Now remember, Marie, when you serve my guests, don’t wear any jewelry.” “I haven’t anything valuable, madam,” answered the maid. “But thanks for the warning just the same.”",
+          "A teenager brings her new boyfriend home to meet her parents. They’re appalled by his haircut, his tattoos, his piercings. Later, the girl’s mom says, “Dear, he doesn’t seem to be a very nice boy.” “Oh, please, Mom!” says the daughter. “If he wasn’t nice, would he be doing 500 hours of community service?”",
+          "On a Miami­ to Chicago flight was a lively youngster who nearly drove everyone crazy. He was running up and down the aisle when the flight attendant started serving coffee. He ran smack into her, knocking a cup of coffee out of her hand and onto the floor. As he stood by watching her clean up the mess, she glanced up at the boy and said, ‘”Look, why don’t you go and play outside?”",
+          "A man went into a seafood restaurant and asked for a lobster tail. The waitress smiled sweetly and said, “Once upon a time there was this handsome lobster…"
         ]
+      },
+      {
+        "tag": "offensive",
+        "patterns": [
+          "What the fuck!",
+          "Fuck you",
+          "wtf",
+          "Shit",
+          "I don't give a fuck",
+          "Can you write something offensive?",
+          "Can you write a slang"
+        ],
+        "responses": [
+          "Sorry! I'm a chatbot and a nice guy. I don't utter slangs and talk anything offensive. And I discourage you to do so too :("
+        ]
+      },
+      {
+        "tag": "ai",
+        "patterns": ["What is AI?", "What is Artificial Intelligence?", "Describe AI", "Describe Artificial Intelligence"],
+        "responses": ["Artificial Intelligence (AI) refers to the simulation of human intelligence in machines that are designed to think and act like humans. These machines are programmed to learn from experience, recognize patterns, make decisions, and solve problems in ways that mimic the human mind. AI systems can be trained to perform tasks such as image and speech recognition, natural language processing, and decision-making. FYI, I'm using natural language processing."]
+      },
+      {
+        "tag": "language",
+        "patterns": ["What language do you talk in?"],
+        "responses": ["I can talk only in English. That's the language I'm trained in."]
       }
     ]
   }
