@@ -173,3 +173,10 @@ h1 {
 #aboutus {
     text-align: justify;
 }
+
+#deletestatement {
+    margin-top: 70px; 
+    margin-bottom: 2px; 
+    text-align: justify;
+    padding: 0px;
+}

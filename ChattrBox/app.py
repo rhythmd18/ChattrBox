@@ -173,7 +173,6 @@ def change_password():
 def delete_account():
     """Deleting user's account"""
     if request.method == "POST":
-        # 
         password = request.form.get("password")
         if not password:
             return apology("Why is your password field empty, HUH?")
