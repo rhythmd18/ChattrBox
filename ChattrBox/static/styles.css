@@ -27,7 +27,7 @@ h1 {
 
 .btn {
     margin-top: 20px;
-    background-color: #209CEE;
+    background-color: #007dd0;
 }
 
 
@@ -57,7 +57,7 @@ h1 {
     border-radius: 20px;
     border-width: 1px;
     border-style: solid;
-    border-color: rgb(32, 156, 238, 0.5);
+    border-color: rgb(0, 125, 208, 0.5);
     background-color: rgb(0, 0, 0, 0.1);
     overflow-y: auto;
     flex-direction: column-reverse;
@@ -74,7 +74,6 @@ h1 {
 
 .bottom-panel {
     width: 100%;
-    border-color: rgb(118, 143, 255, 0.5);
     margin-top: 10px;
     padding: 0px;
 }
@@ -146,7 +145,7 @@ h1 {
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     border-bottom-left-radius: 20px;
-    background: #209CEE;
+    background: #007dd0;
     color: white;
 }
 
@@ -168,7 +167,7 @@ h1 {
     border-width: 1px;
     border-style: solid;
     border-radius: 20px;
-    border-color: rgb(32, 156, 238, 0.5);
+    border-color: rgb(0, 125, 208, 0.5);
 }
 
 #aboutus {
