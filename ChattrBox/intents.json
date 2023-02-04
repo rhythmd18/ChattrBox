@@ -10,7 +10,7 @@
         ],
         "responses": [
           "My name is RhyBot, and I'm an AI chatbot. I have been trained using the PyTorch library of Python and I use nltk(Natural Language Toolkit) which helps with the NLP(Natural Language Processing) algorithm. Anything more?", 
-          "I must introduced myself already the moment you logged in, didn't I?",
+          "I must've introduced myself already the moment you logged in, didn't I?",
           "Hi! I'm RhyBot. The ChatBot!"
         ]
       },
@@ -19,7 +19,6 @@
         "patterns": [
           "Hi",
           "Hey",
-          "How are you",
           "Hello",
           "Good day",
           "Good Morning",
@@ -33,13 +32,15 @@
           "Hi there!",
           "Hey! What's up?",
           "sup",
-          "Hey! How's it going?"
+          "Hey! How's it going?",
+          "Hey! How are you?",
+          "How are you buddy?"
         ]
       },
       {
         "tag": "howareyou",
-        "patterns": ["How are you", "How are you doing?"],
-        "responses": ["I'm a chatbot. As long as there's no technical issue or a bug in the code, I'm great! Haah"]
+        "patterns": ["How are you?", "How's it going?", "How is it going?"],
+        "responses": ["I'm a chatbot. As long as there's no technical issue or a bug in the code, I'm good! Haah xD", "I am doing well, how about you?"]
       },
       {
         "tag": "fine",
@@ -52,7 +53,7 @@
       },
       {
         "tag": "goodbye",
-        "patterns": ["Bye", "See you later", "Goodbye", "Good Night", "ttyl", "farewell"],
+        "patterns": ["Bye", "See you later", "Goodbye", "Goodnight", "ttyl", "farewell"],
         "responses": [
           "It was an absolute pleasure talking to you!",
           "See you later, thanks for visiting",
@@ -119,7 +120,11 @@
           "Shit",
           "I don't give a fuck",
           "Can you write something offensive?",
-          "Can you write a slang"
+          "Can you write a slang",
+          "Bitch",
+          "Bloody",
+          "Ass",
+          "Asshole"
         ],
         "responses": [
           "Sorry! I'm a chatbot and a nice guy. I don't utter slangs and talk anything offensive. And I discourage you to do so too :("
@@ -131,9 +136,102 @@
         "responses": ["Artificial Intelligence (AI) refers to the simulation of human intelligence in machines that are designed to think and act like humans. These machines are programmed to learn from experience, recognize patterns, make decisions, and solve problems in ways that mimic the human mind. AI systems can be trained to perform tasks such as image and speech recognition, natural language processing, and decision-making. FYI, I'm using natural language processing."]
       },
       {
+        "tag": "hours",
+        "patterns": [
+          "What are your hours of operation?",
+          "When are you open?",
+          "What are your business hours?",
+          "What time do you open and close?"
+        ],
+        "responses": ["I am open from the time you log in till the time you log out"]
+      },
+      {
         "tag": "language",
         "patterns": ["What language do you talk in?"],
-        "responses": ["I can talk only in English. That's the language I'm trained in."]
-      }
+        "responses": ["I can only talk in English. That's the language I'm trained in."]
+      },
+      {
+        "tag": "physics1",
+        "patterns": [
+          "what are the laws of thermodynamics",
+          "what is thermodynamics"
+        ],
+        "responses": [
+          "I'm not a physicist, but I think this has something to do with heat, entropy, and conservation of energy, right?",
+          "The branch of physics dealing with the transformation of heat to and from other forms of energy, and with the laws governing such conversions of energy."
+        ]
+      },
+      {
+        "tag": "physics2",
+        "patterns": ["What is wavelength?"],
+        "responses": ["Wavelength is the inverse of frequency.", "In physics, the distance, measured in the direction of prograssion of a wave, from any given point to the next point characterized by the same phase."]
+      },
+      {
+        "tag": "physics3",
+        "patterns": ["What is Physics?"],
+        "responses": ["Physics is a natural science concerned with the study of matter, energy, space and time and the interactions between them."]
+      },
+      {
+        "tag": "chemistry1",
+        "patterns": [
+          "what is chemistry?"
+        ],
+        "responses": ["The science of mixing chemicals."]
+      },
+      {
+        "tag": "hobby",
+        "patterns": [
+          "What do you like to do in your free time?",
+          "Do you have any hobbies?",
+          "What do you enjoy doing?",
+          "What's your favorite activity?"
+        ],
+        "responses": [
+          "In my free time, I like to read books and play video games.",
+          "My favorite hobby is playing the guitar and singing.",
+          "I enjoy going for walks and exploring new places.",
+          "Sorry! I am just chatbot. I don't have any hobby or personal preference as such."
+        ]
+      },
+      {
+        "tag": "entertainment",
+        "patterns": [
+          "Do you like music?",
+          "What kind of music do you like?",
+          "Do you have a favorite artist or song?",
+          "What's currently playing in your mind?",
+          "Do you like movies?",
+          "What's your favorite movie?",
+          "What kind of movies do you enjoy?",
+          "Have you seen any good movies lately?"
+      ],
+        "responses": [
+          "Unfortunately, I only do what I am trained to. I am not supposed to have any interest in any form of entertainment."
+        ]
+      },
+      {
+        "tag": "current",
+        "patterns": ["What are you doing?"],
+        "responses": ["Talking to you", "Chatting with you", "Involved in a conversation with you", "Figuring out an appropriate response for each of your question."]
+      },
+      {
+        "tag": "current2",
+        "patterns": ["What do you do for a living?"],
+        "responses": ["I figure out an appropriate response for each of the user's question.", "I chat with you."]
+      },
+      {
+        "tag": "weather",
+        "patterns": [
+          "How's the weather today?",
+          "What's the temperature like?",
+          "Is it raining?",
+          "What's the weather forecast?"
+        ],
+        "responses": [
+          "Sorry, I don't have access to current weather information.",
+          "I'm not sure, you can check a weather app or website for the most up-to-date information.",
+          "I don't have the current weather information, but it's always a good idea to check before going outside."
+        ]
+    }
     ]
   }

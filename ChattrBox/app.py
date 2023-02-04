@@ -193,11 +193,21 @@ def delete_account():
         rows = db.fetchall()
         if not check_password_hash(rows[0][2], password):
             return apology("Your password is incorrect!")
+        return redirect("/goodbye")
+
+    return render_template("delete.html")
+
+
+@app.route("/goodbye", methods=["GET", "POST"])
+@login_required
+def goodbye():
+    """Bidding user a farewell"""
+    if request.method == "POST":
         db.execute("DELETE FROM users WHERE id = ?", (session["user_id"],))
         conn.commit()
         return redirect("/login")
-
-    return render_template("delete.html")
+        
+    return render_template("goodbye.html")
 
 
 @app.route("/aboutus")
