@@ -58,4 +58,8 @@ If the user wants to discontinue using ChattrBox, they may wish to delete their 
 ### About Section
 This is the page where the user is gets to know about the application more. Users can give their feedback by going on the link provided on this page and also can get access to the entire source code of this application if they wish to by another link.
 ### Changing Color modes
-Users have been given the ability to toggle the color mode between light and dark as per their preference. They can do so before and after logging in whenever they wish. 
+Users have been given the ability to toggle the color mode between light and dark as per their preference. They can do so before and after logging in whenever they wish.
+
+## Courtesies:
+1) This repo was taken as a reference for the implementation of the chatbot: https://github.com/patrickloeber/chatbot-deployment
+2) ChatGPT: For some styling and aesthetics, and some debugging
