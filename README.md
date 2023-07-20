@@ -1,6 +1,6 @@
 # ChattrBox
 
-## Video Demo:  https://youtu.be/u5TTZdYE5wg
+## Demo Link:  https://rb.gy/u556c
 
 ## Description: 
 ChattrBox is a simple and lightweight conversational AI chatbot which has been built primarily using Flask as the main backend framework. It uses the PyTorch library which has been used to train the data and the nltk(Natural Language Toolkit) library for Natural Language Processing. It uses a Feed Forward Neural Network with two hidden layers.
